@@ -1,25 +1,29 @@
 <template>
   <div class="tabbar">
-	<div class="tabbar-item">
-		<img src="@/assets/img/tabbar/tab_home.png" alt="">
-		<span class="text">首页</span>
-	</div>
-	<div class="tabbar-item">
-		<img src="@/assets/img/tabbar/tab_collect.png" alt="">
-		<span class="text">收藏</span>
-	</div>
-	<div class="tabbar-item">
-		<img src="@/assets/img/tabbar/tab_order.png" alt="">
-		<span class="text">订单</span>
-	</div>
-	<div class="tabbar-item">
-		<img src="@/assets/img/tabbar/tab_message.png" alt="">
-		<span class="text">消息</span>
-	</div>
+	<template v-for="(item, index) in tabbarData">
+		<div class="tabbar-item" 
+			:class="{ active:currentIndex === index }"
+			@click="itemClick(index)"
+			>
+			<img v-if ="currentIndex !== index" :src="getAssetURL(item.image)" alt="">
+			<img v-else :src="getAssetURL(item.imageActive)" alt="">
+			<span class="text">{{ item.text}}</span>
+		</div>
+	</template>
   </div>
 </template>
 
 <script setup>
+
+import tabbarData from "@/assets/data/tabbar.js"
+import { getAssetURL } from "@/utils/get-asset-imgurl";
+import { ref } from "vue";
+
+const currentIndex = ref(0)
+
+const itemClick = (index) => {
+	currentIndex.value = index
+}
 
 </script>
 <style lang="less" scoped>
@@ -39,6 +43,10 @@
 		flex-direction: column; 
 		justify-content: center;
 		align-items: center;
+
+		&.active {
+			color: var(--primary-color);
+		}
 		
 		.text {
 			font-size: 12px;
