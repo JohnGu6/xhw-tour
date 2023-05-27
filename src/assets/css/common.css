@@ -1,7 +1,17 @@
 :root {
 	--primary-color: #ff9854;
+
+	/*  全局修改search样式*/
+	--van-search-left-icon-color: var(--primary-color)  !important;
 }
 body {
 	font-size: 14px;
 	
+}
+.top-page {
+		position: relative;
+		z-index: 9;
+		height: 100vh;
+		background-color: #fff;
+		overflow: auto;
 }
