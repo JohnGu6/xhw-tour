@@ -3,7 +3,7 @@
 	<template v-for="(item, index) in tabbarData">
 		<div class="tabbar-item" 
 			:class="{ active:currentIndex === index }"
-			@click="itemClick(index, item)"
+			@click="itemClick(index)"
 			>
 			<img v-if ="currentIndex !== index" :src="getAssetURL(item.image)" alt="">
 			<img v-else :src="getAssetURL(item.imageActive)" alt="">
@@ -18,13 +18,11 @@
 import tabbarData from "@/assets/data/tabbar.js"
 import { getAssetURL } from "@/utils/get-asset-imgurl";
 import { ref } from "vue";
-import { useRouter } from "vue-router";
 
 const currentIndex = ref(0)
-const router = useRouter()
-const itemClick = (index, item) => {
+
+const itemClick = (index) => {
 	currentIndex.value = index
-	router.push(item.path)
 }
 
 </script>
